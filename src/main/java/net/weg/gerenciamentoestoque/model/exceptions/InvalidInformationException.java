@@ -1,4 +1,4 @@
-package net.weg.gerenciamentoestoque.exceptions;
+package net.weg.gerenciamentoestoque.model.exceptions;
 
 public class InvalidInformationException extends RuntimeException {
 

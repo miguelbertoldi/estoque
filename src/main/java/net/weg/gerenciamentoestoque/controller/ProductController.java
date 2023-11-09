@@ -3,7 +3,7 @@ package net.weg.gerenciamentoestoque.controller;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import net.weg.gerenciamentoestoque.exceptions.InvalidInformationException;
+import net.weg.gerenciamentoestoque.model.exceptions.InvalidInformationException;
 import net.weg.gerenciamentoestoque.model.entity.Product;
 import net.weg.gerenciamentoestoque.service.ProductService;
 import org.springframework.http.HttpStatus;
