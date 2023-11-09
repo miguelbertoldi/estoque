@@ -1,9 +1,9 @@
 package net.weg.gerenciamentoestoque.controller;
 
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import net.weg.gerenciamentoestoque.exceptions.InvalidInformationException;
-import net.weg.gerenciamentoestoque.exceptions.ProductAlreadyExistsException;
-import net.weg.gerenciamentoestoque.exceptions.ProductNotFoundException;
 import net.weg.gerenciamentoestoque.model.entity.Product;
 import net.weg.gerenciamentoestoque.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class ProductController {
             return new ResponseEntity<>(
                     productService.save(product), HttpStatus.OK);
 
-        } catch (ProductAlreadyExistsException e) {
+        } catch (EntityExistsException e) {
             return new ResponseEntity<>(
                     HttpStatus.CONFLICT);
 
@@ -43,7 +43,7 @@ public class ProductController {
             return new ResponseEntity<>(
                     productService.findOneById(id), HttpStatus.OK);
 
-        } catch (ProductNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(
                     HttpStatus.CONFLICT);
         }
@@ -62,7 +62,7 @@ public class ProductController {
             return new ResponseEntity<>(
                     productService.update(product), HttpStatus.OK);
 
-        } catch (ProductNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(
                     HttpStatus.NOT_FOUND);
         }
@@ -76,7 +76,7 @@ public class ProductController {
             return new ResponseEntity<>(
                     HttpStatus.OK);
 
-        } catch (ProductNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(
                     e.getMessage(), HttpStatus.NOT_FOUND);
         }

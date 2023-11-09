@@ -1,12 +1,10 @@
 package net.weg.gerenciamentoestoque.service;
 
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import net.weg.gerenciamentoestoque.exceptions.ProductAlreadyExistsException;
-import net.weg.gerenciamentoestoque.exceptions.ProductNotFoundException;
 import net.weg.gerenciamentoestoque.model.entity.Product;
 import net.weg.gerenciamentoestoque.repository.ProductRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,14 +22,14 @@ public class ProductService {
                 product.getManufacturer())) {
             return productRepository.save(product);
         }
-        throw new ProductAlreadyExistsException();
+        throw new EntityExistsException();
     }
 
     public Product findOneById(Integer id) {
         if (productRepository.existsById(id)) {
             return productRepository.findById(id).get();
         }
-        throw new ProductNotFoundException();
+        throw new EntityNotFoundException();
     }
 
     public List<Product> findAll() {
@@ -43,14 +41,14 @@ public class ProductService {
                 product.getId())) {
             return productRepository.save(product);
         }
-        throw new ProductNotFoundException();
+        throw new EntityNotFoundException();
     }
 
     public void delete(Integer id) {
         if (productRepository.existsById(id)) {
             productRepository.deleteById(id);
         }
-        throw new ProductNotFoundException();
+        throw new EntityNotFoundException();
     }
 
 
