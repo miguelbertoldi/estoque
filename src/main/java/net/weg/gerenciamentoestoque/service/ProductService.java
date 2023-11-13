@@ -17,10 +17,9 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public Product save(Product product) {
-        if (!productRepository.existsByNameAndDescriptionAndManufacturer(
+        if (!productRepository.existsByNameAndDescription(
                 product.getName(),
-                product.getDescription(),
-                product.getManufacturer())) {
+                product.getDescription())) {
             return productRepository.save(product);
         }
         throw new EntityExistsException();

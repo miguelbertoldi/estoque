@@ -40,11 +40,12 @@ public class Product {
     @Column(nullable = false)
     private Double measure;
 
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(nullable = false)
     private Manufacturer manufacturer;
 
-    @Column(nullable = false)
-    private String category;
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(nullable = false)
+    private Category category;
 
 }
