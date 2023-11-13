@@ -1,5 +1,6 @@
 package net.weg.gerenciamentoestoque.repository;
 
+import net.weg.gerenciamentoestoque.model.entity.Manufacturer;
 import net.weg.gerenciamentoestoque.model.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,6 @@ public interface ProductRepository
 
     boolean existsByNameAndDescriptionAndManufacturer(String name,
                                                       String description,
-                                                      String manufacturer);
+                                                      Manufacturer manufacturer);
 
 }

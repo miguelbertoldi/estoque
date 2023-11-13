@@ -40,9 +40,9 @@ public class Product {
     @Column(nullable = false)
     private Double measure;
 
-    @Column(length = 30,
-            nullable = false)
-    private String manufacturer;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Manufacturer manufacturer;
 
     @Column(nullable = false)
     private String category;

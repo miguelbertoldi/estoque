@@ -3,9 +3,8 @@ package net.weg.gerenciamentoestoque.controller;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import net.weg.gerenciamentoestoque.model.exception.InvalidInformationException;
-import net.weg.gerenciamentoestoque.model.entity.Product;
-import net.weg.gerenciamentoestoque.service.ProductService;
+import net.weg.gerenciamentoestoque.model.entity.Manufacturer;
+import net.weg.gerenciamentoestoque.service.ManufacturerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,53 +13,49 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/manufacturer")
+public class ManufacturerController {
 
-    private ProductService productService;
+    private ManufacturerService manufacturerService;
 
     @PostMapping
-    public ResponseEntity<Product> save(
-            @RequestBody Product product) {
+    public ResponseEntity<Manufacturer> save(
+            @RequestBody Manufacturer manufacturer) {
         try {
             return new ResponseEntity<>(
-                    productService.save(product), HttpStatus.OK);
+                    manufacturerService.save(manufacturer), HttpStatus.OK);
 
         } catch (EntityExistsException e) {
             return new ResponseEntity<>(
                     HttpStatus.CONFLICT);
-
-        } catch (InvalidInformationException e) {
-            return new ResponseEntity<>(
-                    HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findOneById(
+    public ResponseEntity<Manufacturer> findOneById(
             @PathVariable Integer id) {
         try {
             return new ResponseEntity<>(
-                    productService.findOneById(id), HttpStatus.OK);
+                    manufacturerService.findOneById(id), HttpStatus.OK);
 
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(
-                    HttpStatus.CONFLICT);
+                     HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
+    public ResponseEntity<List<Manufacturer>> findAll() {
         return new ResponseEntity<>(
-                productService.findAll(), HttpStatus.OK);
+                manufacturerService.findAll(), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<Product> update(
-            @RequestBody Product product) {
+    public ResponseEntity<Manufacturer> update(
+            @RequestBody Manufacturer manufacturer) {
         try {
             return new ResponseEntity<>(
-                    productService.update(product), HttpStatus.OK);
+                    manufacturerService.update(manufacturer), HttpStatus.OK);
 
         } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(
@@ -72,7 +67,6 @@ public class ProductController {
     public ResponseEntity<String> delete(
             @RequestParam Integer id) {
         try {
-            productService.delete(id);
             return new ResponseEntity<>(
                     HttpStatus.OK);
 
